@@ -1,7 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark premium-navbar">
   <div class="container">
-   <a class="navbar-brand fw-bold" href="{% url 'home' %}">
-     Donya-e-Eqtesad.
+  <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+    <img src="{% static 'images/logo.png' %}"
+         alt="Donya-e-Eqtesad Logo"
+         class="site-logo">
+
+    <span class="site-name">Donya-e-Eqtesad</span>
 </a>
 
     <button

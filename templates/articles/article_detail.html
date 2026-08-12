@@ -1,268 +1,227 @@
 {% extends "base.html" %}
 
-
 {% block title %}
-{{ article.title }} | News Land
+{{ article.title }} | Donya-e-Eqtesad
 {% endblock %}
-
-
 
 {% block content %}
 
+<div class="article-page">
 
-<div class="container mt-5">
+    <div class="container py-5">
 
-    <div class="card shadow border-0">
+        <article class="article-card">
 
+            {% if article.image %}
 
-        {% if article.image %}
+            <div class="article-image-wrapper">
 
-        <img
-            src="{{ article.image.url }}"
-            class="card-img-top"
-            style="max-height:500px; object-fit:cover;"
-        >
-
-        {% endif %}
-
-
-
-        <div class="card-body">
-
-
-            <span class="badge bg-primary mb-3">
-                {{ article.category }}
-            </span>
-
-
-
-            <h1 class="fw-bold">
-                {{ article.title }}
-            </h1>
-
-
-
-            <p class="text-muted">
-
-                By <strong>{{ article.author }}</strong> |
-
-                {{ article.created_at|date:"F d, Y" }}
-
-            </p>
-
-
-
-            <hr>
-
-
-
-            <div style="font-size:18px; line-height:1.8;">
-
-                {{ article.body|linebreaks }}
+                <img
+                    src="{{ article.image.url }}"
+                    alt="{{ article.title }}"
+                    class="article-image"
+                >
 
             </div>
-
-
-
-            <hr>
-
-
-            <!-- LIKE SECTION -->
-
-
-            <div class="mb-4">
-
-
-                <h4>
-                    ❤️ {{ article.likes.count }} Likes
-                </h4>
-
-
-
-                {% if user.is_authenticated %}
-
-
-                <form method="POST" action="{% url 'like_article' article.id %}">
-
-                    {% csrf_token %}
-
-
-
-                    {% if liked %}
-
-
-                    <button type="submit" class="btn btn-danger">
-
-                        Unlike ❤️
-
-                    </button>
-
-
-
-                    {% else %}
-
-
-                    <button type="submit" class="btn btn-outline-danger">
-
-                        Like 🤍
-
-                    </button>
-
-
-
-                    {% endif %}
-
-
-
-                </form>
-
-
-
-                {% else %}
-
-
-                <a href="{% url 'login' %}" class="btn btn-secondary">
-
-                    Login to Like
-
-                </a>
-
-
-
-                {% endif %}
-
-
-            </div>
-
-
-
-            <hr>
-
-
-
-            <!-- COMMENT SECTION -->
-
-
-            <h3 id="comments">
-
-                Comments
-
-            </h3>
-
-
-
-
-            {% for comment in article.comments.all %}
-
-
-            <div class="card p-2 mb-2">
-
-
-                <strong>
-                    {{ comment.author }}
-                </strong>
-
-
-                <p class="mb-0">
-
-                    {{ comment.body }}
-
-                </p>
-
-
-            </div>
-
-
-
-            {% empty %}
-
-
-            <p>
-
-                No comments yet.
-
-            </p>
-
-
-
-            {% endfor %}
-
-
-
-
-            {% if user.is_authenticated %}
-
-
-
-            <form method="POST" action="{% url 'add_comment' article.id %}">
-
-
-                {% csrf_token %}
-
-
-
-                <textarea
-                    name="body"
-                    class="form-control"
-                    placeholder="Write comment..."
-                    required></textarea>
-
-
-
-
-                <button type="submit" class="btn btn-primary mt-2">
-
-                    Comment
-
-                </button>
-
-
-
-            </form>
-
-
-
-            {% else %}
-
-
-
-            <a href="{% url 'login' %}">
-
-                Login to comment
-
-            </a>
-
-
 
             {% endif %}
 
 
+            <div class="article-content">
 
+                <!-- CATEGORY -->
+
+                <span class="article-category">
+                    {{ article.category }}
+                </span>
+
+
+                <!-- TITLE -->
+
+                <h1 class="article-title">
+                    {{ article.title }}
+                </h1>
+
+
+                <!-- AUTHOR + DATE -->
+
+                <div class="article-meta">
+
+                    <span>
+                        By <strong>{{ article.author }}</strong>
+                    </span>
+
+                    <span class="meta-divider">•</span>
+
+                    <span>
+                        {{ article.created_at|date:"F d, Y" }}
+                    </span>
+
+                </div>
+
+
+                <div class="article-divider"></div>
+
+
+                <!-- ARTICLE BODY -->
+
+                <div class="article-body">
+
+                    {{ article.body|linebreaks }}
+
+                </div>
+
+
+                <div class="article-divider"></div>
+
+
+                <!-- LIKE SECTION -->
+
+                <section class="article-like-section">
+
+                    <div class="like-count">
+
+                        <span>♥</span>
+
+                        {{ article.likes.count }}
+                        Like{{ article.likes.count|pluralize }}
+
+                    </div>
+
+
+                    {% if user.is_authenticated %}
+
+                    <form method="POST"
+                          action="{% url 'like_article' article.id %}">
+
+                        {% csrf_token %}
+
+                        {% if liked %}
+
+                        <button type="submit" class="like-btn liked">
+                            ♥ Unlike
+                        </button>
+
+                        {% else %}
+
+                        <button type="submit" class="like-btn">
+                            ♡ Like
+                        </button>
+
+                        {% endif %}
+
+                    </form>
+
+                    {% else %}
+
+                    <a href="{% url 'login' %}" class="like-btn">
+                        Login to Like
+                    </a>
+
+                    {% endif %}
+
+                </section>
+
+
+                <div class="article-divider"></div>
+
+
+                <!-- COMMENTS -->
+
+                <section class="comments-section">
+
+                    <div class="comments-heading">
+
+                        <h2 id="comments">
+                            Comments
+                        </h2>
+
+                        <span>
+                            {{ article.comments.count }}
+                        </span>
+
+                    </div>
+
+
+                    {% for comment in article.comments.all %}
+
+                    <div class="comment-card">
+
+                        <div class="comment-author">
+                            {{ comment.author }}
+                        </div>
+
+                        <p>
+                            {{ comment.body }}
+                        </p>
+
+                    </div>
+
+
+                    {% empty %}
+
+                    <p class="no-comments">
+                        No comments yet. Be the first to share your thoughts.
+                    </p>
+
+                    {% endfor %}
+
+
+                    {% if user.is_authenticated %}
+
+                    <form method="POST"
+                          action="{% url 'add_comment' article.id %}"
+                          class="comment-form">
+
+                        {% csrf_token %}
+
+                        <textarea
+                            name="body"
+                            class="comment-input"
+                            placeholder="Write your thoughts..."
+                            required></textarea>
+
+                        <button type="submit" class="comment-btn">
+                            Post Comment
+                        </button>
+
+                    </form>
+
+                    {% else %}
+
+                    <div class="login-comment">
+
+                        <p>
+                            Sign in to join the conversation.
+                        </p>
+
+                        <a href="{% url 'login' %}">
+                            Login to comment
+                        </a>
+
+                    </div>
+
+                    {% endif %}
+
+                </section>
+
+            </div>
+
+        </article>
+
+
+        <!-- BACK TO HOME -->
+
+        <div class="article-back">
+
+            <a href="{% url 'home' %}">
+                ← Back to Home
+            </a>
 
         </div>
 
-
     </div>
-
-
-
-
-    <div class="mt-4">
-
-
-        <a href="{% url 'home' %}" class="btn btn-secondary">
-
-            ← Back to Home
-
-        </a>
-
-
-    </div>
-
-
 
 </div>
-
-
 
 {% endblock %}

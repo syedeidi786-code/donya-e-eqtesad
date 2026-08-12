@@ -1,115 +1,147 @@
 {% extends "base.html" %}
 
 {% block title %}
-Dashboard | News Land
+Dashboard | Donya-e-Eqtesad
 {% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="dashboard-page">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="container py-5">
 
-        <div>
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
 
-            <h2>Welcome, {{ user.username }}</h2>
+            <div>
+                <p class="dashboard-label">AUTHOR DASHBOARD</p>
 
-            <p class="text-muted">
-                Manage your articles
-            </p>
+                <h2 class="dashboard-title">
+                    Welcome, {{ user.username }}
+                </h2>
+
+                <p class="dashboard-subtitle">
+                    Manage and oversee your published articles.
+                </p>
+            </div>
+
+            <a href="{% url 'article_create' %}" class="premium-create-btn">
+                <span>+</span> Create Article
+            </a>
 
         </div>
 
-        <a href="{% url 'article_create' %}" class="btn btn-success">
-            + Create Article
-        </a>
 
-    </div>
+        {% if articles %}
 
-    {% if articles %}
+        <!-- Articles Table -->
+        <div class="dashboard-card">
 
-    <div class="table-responsive">
+            <div class="dashboard-card-header">
+                <h3>Your Articles</h3>
 
-        <table class="table table-hover align-middle">
+                <span>
+                    {{ articles|length }} article{{ articles|length|pluralize }}
+                </span>
+            </div>
 
-            <thead class="table-dark">
+            <div class="table-responsive">
 
-                <tr>
+                <table class="premium-table">
 
-                    <th>Title</th>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Published</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
 
-                    <th>Category</th>
+                    <tbody>
 
-                    <th>Published</th>
+                    {% for article in articles %}
 
-                    <th>Actions</th>
+                        <tr>
 
-                </tr>
+                            <td>
+                                <div class="article-table-title">
+                                    {{ article.title }}
+                                </div>
+                            </td>
 
-            </thead>
+                            <td>
+                                <span class="category-badge">
+                                    {{ article.category }}
+                                </span>
+                            </td>
 
-            <tbody>
+                            <td class="date-cell">
+                                {{ article.created_at|date:"M d, Y" }}
+                            </td>
 
-            {% for article in articles %}
+                            <td>
 
-                <tr>
+                                <div class="dashboard-actions">
 
-                    <td>{{ article.title }}</td>
+                                    <a href="{% url 'article_detail' article.id %}"
+                                       class="action-btn view-btn">
+                                        View
+                                    </a>
 
-                    <td>{{ article.category }}</td>
+                                    <a href="{% url 'article_update' article.id %}"
+                                       class="action-btn edit-btn">
+                                        Edit
+                                    </a>
 
-                    <td>{{ article.created_at|date:"M d, Y" }}</td>
+                                    <a href="{% url 'article_delete' article.id %}"
+                                       class="action-btn delete-btn">
+                                        Delete
+                                    </a>
 
-                    <td>
+                                </div>
 
-                        <a href="{% url 'article_detail' article.id %}"
-                           class="btn btn-primary btn-sm">
+                            </td>
 
-                            View
+                        </tr>
 
-                        </a>
+                    {% endfor %}
 
-                        <a href="{% url 'article_update' article.id %}"
-                           class="btn btn-warning btn-sm">
+                    </tbody>
 
-                            Edit
+                </table>
 
-                        </a>
+            </div>
 
-                        <a href="{% url 'article_delete' article.id %}"
-                           class="btn btn-danger btn-sm">
+        </div>
 
-                            Delete
 
-                        </a>
+        {% else %}
 
-                    </td>
+        <!-- Empty Dashboard -->
 
-                </tr>
+        <div class="empty-dashboard">
 
-            {% endfor %}
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    {% else %}
-
-        <div class="text-center mt-5">
+            <div class="empty-icon">
+                +
+            </div>
 
             <h3>No Articles Yet</h3>
 
-            <p>Create your first article to get started.</p>
+            <p>
+                Your editorial desk is waiting.
+                Create your first article to get started.
+            </p>
 
-            <a href="{% url 'article_create' %}" class="btn btn-success">
+            <a href="{% url 'article_create' %}" class="premium-create-btn">
                 Create First Article
             </a>
 
         </div>
 
-    {% endif %}
+        {% endif %}
+
+    </div>
 
 </div>
 

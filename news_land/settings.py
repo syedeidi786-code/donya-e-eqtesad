@@ -11,18 +11,15 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ljh)ra+^^p+ysfgeu#x+%hb7=@=ca$$+&i*a^cipk_*v=5yv_z'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -131,11 +128,16 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = '/'
 
 # Email settings
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 DEFAULT_FROM_EMAIL = 'syedeidi786@gmail.com'
 SERVER_EMAIL = 'syedeidi786@gmail.com'
+
 EMAIL_HOST = 'smtp-relay.brevo.com'
-EMAIL_HOST_USER = 'b3cf25001@smtp-brevo.com'
-EMAIL_HOST_PASSWORD = 'xsmtpsib-3237afd79a6ca3806fca3d49511c94ee02c2e57c3e5f597bd705abfb83f86924-OHdT0IuAM0H6VZpp'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+

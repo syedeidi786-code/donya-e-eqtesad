@@ -1,50 +1,119 @@
 {% extends "base.html" %}
 
 {% block title %}
-Login | News Land
+Login | Donya-e-Eqtesad
 {% endblock %}
 
 {% block content %}
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
+<div class="luxury-auth-page">
 
-        <h2 class="mb-4">Login</h2>
+    <div class="auth-card">
 
-       <form method="post" id="loginForm">
+        <!-- Header -->
 
-            {% csrf_token %}
+        <div class="auth-header">
+
+            <div class="auth-kicker">
+                DONYA-E-EQTESAD
+            </div>
+
+            <h1>
+                Welcome Back
+            </h1>
 
             <p>
-    <label for="id_username">Username:</label>
-    {{ form.username }}
-</p>
+                Sign in to continue to your newsroom.
+            </p>
 
-<p>
-    <label for="id_password">Password:</label>
-    {{ form.password }}
-</p>
+        </div>
 
-            <button class="btn btn-primary">
-                Login
-            </button>
-            <p class="mt-3">
-   <a href="{% url 'password_reset' %}" id="forgotPassword">
-    Forgot Password?
-</a>
-</p>
 
-        </form>
+        <!-- Form -->
+
+        <div class="auth-body">
+
+            <form method="post" id="loginForm">
+
+                {% csrf_token %}
+
+
+                <div class="auth-field">
+
+                    <label for="id_username">
+                        Username
+                    </label>
+
+                    {{ form.username }}
+
+                </div>
+
+
+                <div class="auth-field">
+
+                    <label for="id_password">
+                        Password
+                    </label>
+
+                    {{ form.password }}
+
+                </div>
+
+
+                {% if form.errors %}
+
+                <div class="auth-error">
+                    Invalid username or password.
+                    Please try again.
+                </div>
+
+                {% endif %}
+
+
+                <button type="submit" class="auth-button">
+                    Sign In
+                </button>
+
+
+                <div class="forgot-password">
+
+                    <a href="{% url 'password_reset' %}" id="forgotPassword">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- Footer -->
+
+        <div class="auth-footer">
+
+            <span>
+                New to Donya-e-Eqtesad?
+            </span>
+
+            <a href="{% url 'signup' %}">
+                Create an account
+            </a>
+
+        </div>
 
     </div>
+
 </div>
+
+
 <script>
 
-document.getElementById("forgotPassword").addEventListener("click", function(e){
+document.getElementById("forgotPassword").addEventListener("click", function(e) {
 
     let username = document.getElementById("id_username").value;
 
-    if(username.trim() === ""){
+    if (username.trim() === "") {
 
         e.preventDefault();
 

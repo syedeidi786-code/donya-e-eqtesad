@@ -1,52 +1,73 @@
 {% extends "base.html" %}
 
 {% block title %}
-Delete Article
+Delete Article | Donya-e-Eqtesad
 {% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="delete-article-page">
 
-<div class="card shadow">
+    <div class="container py-5">
 
-<div class="card-body text-center">
+        <div class="row justify-content-center">
 
-<h2 class="text-danger">
-Delete Article
-</h2>
+            <div class="col-lg-6 col-md-8">
 
-<p class="mt-3">
+                <div class="delete-card">
 
-Are you sure you want to delete
+                    <div class="delete-icon">
+                        !
+                    </div>
 
-<strong>
+                    <p class="delete-label">
+                        EDITORIAL DESK
+                    </p>
 
-{{ article.title }}
+                    <h2>
+                        Delete Article
+                    </h2>
 
-</strong>?
+                    <div class="delete-divider"></div>
 
-</p>
+                    <p class="delete-message">
+                        Are you sure you want to permanently delete
+                    </p>
 
-<form method="post">
+                    <h3 class="article-delete-title">
+                        "{{ article.title }}"
+                    </h3>
 
-{% csrf_token %}
+                    <p class="delete-warning">
+                        This action cannot be undone.
+                    </p>
 
-<button class="btn btn-danger">
-Yes, Delete
-</button>
 
-<a href="{% url 'dashboard' %}" class="btn btn-secondary">
+                    <form method="post">
 
-Cancel
+                        {% csrf_token %}
 
-</a>
+                        <div class="delete-actions">
 
-</form>
+                            <button type="submit" class="confirm-delete-btn">
+                                Yes, Delete
+                            </button>
 
-</div>
+                            <a href="{% url 'dashboard' %}" class="cancel-delete-btn">
+                                Cancel
+                            </a>
 
-</div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

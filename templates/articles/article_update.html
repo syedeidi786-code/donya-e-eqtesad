@@ -1,44 +1,74 @@
 {% extends "base.html" %}
 
 {% block title %}
-Edit Article
+Edit Article | Donya-e-Eqtesad
 {% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="edit-article-page">
 
-<div class="row justify-content-center">
+    <div class="container py-5">
 
-<div class="col-lg-8">
+        <div class="row justify-content-center">
 
-<div class="card shadow">
+            <div class="col-lg-8">
 
-<div class="card-body">
+                <div class="edit-article-card">
 
-<h2 class="mb-4">
-Edit Article
-</h2>
+                    <!-- Header -->
 
-<form method="post" enctype="multipart/form-data">
+                    <div class="edit-article-header">
 
-{% csrf_token %}
+                        <p class="edit-label">
+                            EDITORIAL DESK
+                        </p>
 
-{{ form.as_p }}
+                        <h2>
+                            Edit Article
+                        </h2>
 
-<button class="btn btn-warning">
-Update Article
-</button>
+                        <p>
+                            Refine your story before it reaches the world.
+                        </p>
 
-</form>
+                    </div>
 
-</div>
 
-</div>
+                    <!-- Form -->
 
-</div>
+                    <div class="edit-article-body">
 
-</div>
+                        <form method="post" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+
+                            {{ form.as_p }}
+
+
+                            <div class="edit-actions">
+
+                                <button type="submit" class="update-btn">
+                                    Update Article
+                                </button>
+
+                                <a href="{% url 'dashboard' %}" class="edit-cancel-btn">
+                                    Cancel
+                                </a>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

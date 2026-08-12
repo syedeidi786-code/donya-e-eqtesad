@@ -1,44 +1,67 @@
 {% extends "base.html" %}
 
 {% block title %}
-Create Article
+Create Article | Donya-e-Eqtesad
 {% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="create-article-page">
 
-<div class="row justify-content-center">
+    <div class="container py-5">
 
-<div class="col-lg-8">
+        <div class="row justify-content-center">
 
-<div class="card shadow">
+            <div class="col-lg-8">
 
-<div class="card-body">
+                <div class="create-article-card">
 
-<h2 class="mb-4">
-Publish Article
-</h2>
+                    <!-- Header -->
+                    <div class="create-article-header">
 
-<form method="post" enctype="multipart/form-data">
+                        <p class="create-label">
+                            EDITORIAL DESK
+                        </p>
 
-{% csrf_token %}
+                        <h2>
+                            Publish Article
+                        </h2>
 
-{{ form.as_p }}
+                        <p>
+                            Share your story with the world.
+                        </p>
 
-<button class="btn btn-success">
-Publish
-</button>
+                    </div>
 
-</form>
 
-</div>
+                    <!-- Form -->
+                    <div class="create-article-body">
 
-</div>
+                        <form method="post" enctype="multipart/form-data">
 
-</div>
+                            {% csrf_token %}
 
-</div>
+                            {{ form.as_p }}
+
+                            <div class="publish-area">
+
+                                <button type="submit" class="publish-btn">
+                                    Publish Article
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

@@ -1,45 +1,75 @@
 {% extends "base.html" %}
 
+{% block title %}
+Create Account | Donya-e-Eqtesad
+{% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="luxury-auth-page">
 
-<div class="row justify-content-center">
+    <div class="auth-card">
 
-<div class="col-md-6">
+        <!-- HEADER -->
 
-<div class="card shadow p-4">
+        <div class="auth-header">
 
+            <div class="auth-kicker">
+                DONYA-E-EQTESAD
+            </div>
 
-<h2 class="text-center mb-4">
-Join News Land 📰
-</h2>
+            <h1>
+                Join Us
+            </h1>
 
+            <p>
+                Become part of the conversation.
+            </p>
 
-<form method="post">
-
-{% csrf_token %}
-
-
-{{ form.as_p }}
-
-
-<button class="btn btn-primary w-100">
-Create Account
-</button>
+        </div>
 
 
-</form>
+        <!-- FORM -->
 
+        <div class="auth-body">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <div class="signup-form">
+
+                    {{ form.as_p }}
+
+                </div>
+
+
+                <button type="submit" class="auth-button">
+                    Create Account
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="auth-footer">
+
+            <span>
+                Already have an account?
+            </span>
+
+            <a href="{% url 'login' %}">
+                Sign In
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
-
-</div>
-
-</div>
-
-</div>
-
 
 {% endblock %}
