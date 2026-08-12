@@ -1,0 +1,141 @@
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            #3d3d3d 0%,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            #292929 0%,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #050505,
+            #111111,
+            #252525
+        );
+    color: #ffffff;
+    padding: 100px 20px;
+    margin-bottom: 60px;
+}
+
+.news-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.8px;
+    color: #ffffff;
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.45);
+}
+
+.news-subtitle {
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #d1d5db;
+    letter-spacing: 0.4px;
+    line-height: 1.7;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.hero .input-group {
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero .form-control {
+    border: none;
+    padding: 16px 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero .btn-warning {
+    padding-left: 28px;
+    padding-right: 28px;
+    font-weight: 600;
+}
+
+/* =========================
+   SECTION & CARDS
+========================= */
+
+.section-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 38px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a1a1a;
+}
+
+.news-card {
+    border: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+}
+
+.badge-news {
+    background-color: #0d6efd;
+    color: #ffffff;
+    font-weight: 500;
+}
+.abc {
+    font-family: "Poppins", sans-serif;
+    font-size: 65px;
+    font-weight: 40;
+    color: #0752db;
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 15px;
+    }
+
+    .news-title {
+        font-size: 32px;
+    }
+
+    .news-subtitle {
+        font-size: 16px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+}
+
+
+
+
+
+
+
+

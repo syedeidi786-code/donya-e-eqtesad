@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     "articles",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -116,5 +117,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
-AUTH_USER_MODEL = "accounts.CustomUser"
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static/',
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Authentication URLs
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = '/'
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'syedeidi786@gmail.com'
+SERVER_EMAIL = 'syedeidi786@gmail.com'
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_HOST_USER = 'b3cf25001@smtp-brevo.com'
+EMAIL_HOST_PASSWORD = 'xsmtpsib-3237afd79a6ca3806fca3d49511c94ee02c2e57c3e5f597bd705abfb83f86924-OHdT0IuAM0H6VZpp'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

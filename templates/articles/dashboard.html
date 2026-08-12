@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard | News Land
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2>Welcome, {{ user.username }}</h2>
+
+            <p class="text-muted">
+                Manage your articles
+            </p>
+
+        </div>
+
+        <a href="{% url 'article_create' %}" class="btn btn-success">
+            + Create Article
+        </a>
+
+    </div>
+
+    {% if articles %}
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>Title</th>
+
+                    <th>Category</th>
+
+                    <th>Published</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for article in articles %}
+
+                <tr>
+
+                    <td>{{ article.title }}</td>
+
+                    <td>{{ article.category }}</td>
+
+                    <td>{{ article.created_at|date:"M d, Y" }}</td>
+
+                    <td>
+
+                        <a href="{% url 'article_detail' article.id %}"
+                           class="btn btn-primary btn-sm">
+
+                            View
+
+                        </a>
+
+                        <a href="{% url 'article_update' article.id %}"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a href="{% url 'article_delete' article.id %}"
+                           class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+        <div class="text-center mt-5">
+
+            <h3>No Articles Yet</h3>
+
+            <p>Create your first article to get started.</p>
+
+            <a href="{% url 'article_create' %}" class="btn btn-success">
+                Create First Article
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
