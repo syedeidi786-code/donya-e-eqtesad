@@ -1,2 +1,16 @@
-# donya-e-eqtesad
-Donya-e-Eqtesad is a modern Django-powered news platform featuring articles across technology, world affairs, health, sports, and current events. It includes user authentication, article creation and management, search, likes, comments, password reset, and a clean editorial-inspired design.
+# Donya-e-Eqtesad
+
+A Django-based news website for publishing and reading news articles.
+
+## 🌐 Live Website
+
+[Visit Donya-e-Eqtesad]( https://donya-e-eqtesad-3.onrender.com)
+
+## 🛠️ Technologies
+
+- Python
+- Django
+- HTML
+- CSS
+- Bootstrap
+- PostgreSQL
