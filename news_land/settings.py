@@ -10,6 +10,10 @@ import dj_database_url
 import cloudinary
 
 
+# ============================================================
+# BASE
+# ============================================================
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(BASE_DIR / ".env")
@@ -24,7 +28,9 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 if not SECRET_KEY:
     raise ValueError("DJANGO_SECRET_KEY is not set")
 
+
 DEBUG = os.environ.get("DEBUG", "False") == "True"
+
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -32,8 +38,11 @@ ALLOWED_HOSTS = [
     ".onrender.com",
 ]
 
+
 if os.environ.get("ALLOWED_HOST"):
-    ALLOWED_HOSTS.append(os.environ.get("ALLOWED_HOST"))
+    ALLOWED_HOSTS.append(
+        os.environ.get("ALLOWED_HOST")
+    )
 
 
 # ============================================================
@@ -41,9 +50,12 @@ if os.environ.get("ALLOWED_HOST"):
 # ============================================================
 
 INSTALLED_APPS = [
+
+    # Cloudinary
     "cloudinary",
     "cloudinary_storage",
 
+    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -51,9 +63,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    # Your apps
     "accounts",
     "articles",
 
+    # Extensions
     "django_extensions",
 ]
 
@@ -63,16 +77,22 @@ INSTALLED_APPS = [
 # ============================================================
 
 MIDDLEWARE = [
+
     "django.middleware.security.SecurityMiddleware",
 
     # WhiteNoise
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
+
     "django.middleware.common.CommonMiddleware",
+
     "django.middleware.csrf.CsrfViewMiddleware",
+
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+
     "django.contrib.messages.middleware.MessageMiddleware",
+
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -91,14 +111,25 @@ WSGI_APPLICATION = "news_land.wsgi.application"
 # ============================================================
 
 TEMPLATES = [
+
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "BACKEND":
+            "django.template.backends.django.DjangoTemplates",
+
+        "DIRS": [
+            BASE_DIR / "templates"
+        ],
+
         "APP_DIRS": True,
+
         "OPTIONS": {
+
             "context_processors": [
+
                 "django.template.context_processors.request",
+
                 "django.contrib.auth.context_processors.auth",
+
                 "django.contrib.messages.context_processors.messages",
             ],
         },
@@ -112,20 +143,32 @@ TEMPLATES = [
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
+
 if DATABASE_URL:
+
+    # Render / PostgreSQL
     DATABASES = {
+
         "default": dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
             ssl_require=True,
         )
+
     }
+
 else:
+
     # Local development
     DATABASES = {
+
         "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+
+            "ENGINE":
+                "django.db.backends.sqlite3",
+
+            "NAME":
+                BASE_DIR / "db.sqlite3",
         }
     }
 
@@ -135,18 +178,22 @@ else:
 # ============================================================
 
 AUTH_PASSWORD_VALIDATORS = [
+
     {
         "NAME":
             "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
+
     {
         "NAME":
             "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
+
     {
         "NAME":
             "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
+
     {
         "NAME":
             "django.contrib.auth.password_validation.NumericPasswordValidator",
@@ -168,41 +215,57 @@ USE_TZ = True
 
 
 # ============================================================
-# STATIC + MEDIA STORAGE
+# STATIC FILES
 # ============================================================
 
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static/",
+    BASE_DIR / "static",
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+
+# ============================================================
+# STORAGE
+# ============================================================
+
+# Required by django-cloudinary-storage
+STATICFILES_STORAGE = (
+    "django.contrib.staticfiles.storage.StaticFilesStorage"
+)
 
 STORAGES = {
     "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        "BACKEND": (
+            "cloudinary_storage.storage.MediaCloudinaryStorage"
+        ),
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": (
+            "django.contrib.staticfiles.storage.StaticFilesStorage"
+        ),
     },
 }
+
 # ============================================================
 # CLOUDINARY
 # ============================================================
 
-CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
-    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
-}
-
 cloudinary.config(
-    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    api_key=os.environ.get("CLOUDINARY_API_KEY"),
-    api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
+
+    cloud_name=os.environ.get(
+        "CLOUDINARY_CLOUD_NAME"
+    ),
+
+    api_key=os.environ.get(
+        "CLOUDINARY_API_KEY"
+    ),
+
+    api_secret=os.environ.get(
+        "CLOUDINARY_API_SECRET"
+    ),
 )
 
 
@@ -221,17 +284,26 @@ LOGOUT_REDIRECT_URL = "/"
 # EMAIL
 # ============================================================
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = (
+    "django.core.mail.backends.smtp.EmailBackend"
+)
+
 
 DEFAULT_FROM_EMAIL = "syedeidi786@gmail.com"
 
 SERVER_EMAIL = "syedeidi786@gmail.com"
 
+
 EMAIL_HOST = "smtp-relay.brevo.com"
 
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_USER = os.environ.get(
+    "EMAIL_HOST_USER"
+)
 
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_PASSWORD = os.environ.get(
+    "EMAIL_HOST_PASSWORD"
+)
+
 
 EMAIL_PORT = 587
 
