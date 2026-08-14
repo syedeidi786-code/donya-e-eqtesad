@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
     # Cloudinary
     "cloudinary",
-    "cloudinary_storage",
+    # "cloudinary_storage",
 
     # Django
     "django.contrib.admin",
@@ -215,37 +215,25 @@ USE_TZ = True
 
 
 # ============================================================
-# STATIC FILES
+# STATIC + MEDIA STORAGE
 # ============================================================
 
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "static/",
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-
-# ============================================================
-# STORAGE
-# ============================================================
-
-# Required by django-cloudinary-storage
-STATICFILES_STORAGE = (
-    "django.contrib.staticfiles.storage.StaticFilesStorage"
-)
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 STORAGES = {
     "default": {
-        "BACKEND": (
-            "cloudinary_storage.storage.MediaCloudinaryStorage"
-        ),
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": (
-            "django.contrib.staticfiles.storage.StaticFilesStorage"
-        ),
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
@@ -253,21 +241,17 @@ STORAGES = {
 # CLOUDINARY
 # ============================================================
 
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
+}
+
 cloudinary.config(
-
-    cloud_name=os.environ.get(
-        "CLOUDINARY_CLOUD_NAME"
-    ),
-
-    api_key=os.environ.get(
-        "CLOUDINARY_API_KEY"
-    ),
-
-    api_secret=os.environ.get(
-        "CLOUDINARY_API_SECRET"
-    ),
+    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.environ.get("CLOUDINARY_API_KEY"),
+    api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
 )
-
 
 # ============================================================
 # AUTHENTICATION
