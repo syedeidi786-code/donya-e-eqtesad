@@ -25,3 +25,7 @@ media/
 # OS
 Thumbs.db
 .DS_Store
+
+.env
+.env.local
+config/secrets.json
