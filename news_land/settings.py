@@ -242,17 +242,16 @@ STORAGES = {
 # ============================================================
 
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
-    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
+    "CLOUD_NAME": os.environ.get("vznkdjoy"),
+    "API_KEY": os.environ.get("589831933446475"),
+    "API_SECRET": os.environ.get("pGUGgiwyeYaF10zZ2Zwbf8tOHxU"),
 }
 
 cloudinary.config(
-    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    api_key=os.environ.get("CLOUDINARY_API_KEY"),
-    api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
+    cloud_name=os.environ.get("vznkdjoy"),
+    api_key=os.environ.get("589831933446475"),
+    api_secret=os.environ.get("pGUGgiwyeYaF10zZ2Zwbf8tOHxU"),
 )
-
 # ============================================================
 # AUTHENTICATION
 # ============================================================
