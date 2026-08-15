@@ -26,6 +26,8 @@ media/
 Thumbs.db
 .DS_Store
 
+# .gitignore
 .env
-.env.local
-config/secrets.json
+.env.*
+config/smtp.json
+secrets.yaml
