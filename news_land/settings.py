@@ -280,11 +280,11 @@ SERVER_EMAIL = "syedeidi786@gmail.com"
 EMAIL_HOST = "smtp-relay.brevo.com"
 
 EMAIL_HOST_USER = os.environ.get(
-    "EMAIL_HOST_USER"
+    "b3cf25001@smtp-brevo.com"
 )
 
 EMAIL_HOST_PASSWORD = os.environ.get(
-    "EMAIL_HOST_PASSWORD"
+    "xsmtpsib-3237afd79a6ca3806fca3d49511c94ee02c2e57c3e5f597bd705abfb83f86924-k6aTNUMqxVaLxgiE"
 )
 
 
