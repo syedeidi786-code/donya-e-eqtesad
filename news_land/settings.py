@@ -284,7 +284,7 @@ EMAIL_HOST_USER = os.environ.get(
 )
 
 EMAIL_HOST_PASSWORD = os.environ.get(
-    "xsmtpsib-3237afd79a6ca3806fca3d49511c94ee02c2e57c3e5f597bd705abfb83f86924-k6aTNUMqxVaLxgiE"
+    "xsmtpsib-3237afd79a6ca3806fca3d49511c94ee02c2e57c3e5f597bd705abfb83f86924-MhjN3ZhSYzd1GMZD"
 )
 
 
